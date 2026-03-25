@@ -64,6 +64,11 @@ def test_new_adr_creates_numbered_file(tmp_path: Path) -> None:
 
 def test_log_iteration_creates_dated_markdown_file(tmp_path: Path) -> None:
     project_root = prepare_scaffold_copy(tmp_path)
+    before = {
+        path.name
+        for path in (project_root / ".ai/iterations").glob("*.md")
+        if path.name != "README.md"
+    }
 
     run_script(
         str(ROOT / "scripts/log_iteration.py"),
@@ -76,7 +81,11 @@ def test_log_iteration_creates_dated_markdown_file(tmp_path: Path) -> None:
     )
 
     iteration_files = sorted((project_root / ".ai/iterations").glob("*.md"))
-    created = [path for path in iteration_files if path.name != "README.md"]
+    created = [
+        path
+        for path in iteration_files
+        if path.name != "README.md" and path.name not in before
+    ]
     assert len(created) == 1
     assert "Bootstrap scaffold foundation" in created[0].read_text(encoding="utf-8")
 

@@ -15,6 +15,10 @@ export default function HomePage() {
           Launch new fullstack projects with shared context, stable boundaries,
           and lightweight governance from day one.
         </p>
+        <div className="hero-actions">
+          <code>uv sync --group dev</code>
+          <code>python scripts/init_project.py --name demo-project</code>
+        </div>
       </section>
 
       <section className="content-card">

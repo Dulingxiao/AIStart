@@ -17,6 +17,7 @@ TRANSIENT_NAMES = {
 }
 
 TEXT_SUFFIXES = {
+    ".lock",
     ".md",
     ".toml",
     ".py",

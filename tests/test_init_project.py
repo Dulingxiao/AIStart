@@ -38,6 +38,12 @@ def test_init_project_generates_clean_named_copy(tmp_path: Path) -> None:
     assert "demo-project" in mission
     assert "AIStart" not in readme
 
+    lockfile = generated_root / "uv.lock"
+    if lockfile.exists():
+        lock_text = lockfile.read_text(encoding="utf-8")
+        assert 'name = "demo-project"' in lock_text
+        assert 'name = "aistart"' not in lock_text
+
     assert not (generated_root / ".git").exists()
     assert not (generated_root / ".venv").exists()
     assert not (generated_root / ".pytest_cache").exists()
