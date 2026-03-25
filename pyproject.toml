@@ -4,10 +4,13 @@ version = "0.1.0"
 description = "AI cold-start fullstack scaffold with canonical context and governance scripts"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+  "fastapi>=0.135,<1",
+]
 
 [dependency-groups]
 dev = [
+  "httpx>=0.28,<1",
   "pytest>=8.3,<9",
 ]
 
@@ -18,3 +21,6 @@ build-backend = "hatchling.build"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+
+[tool.hatch.build.targets.wheel]
+packages = ["apps"]
